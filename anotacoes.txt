@@ -1,0 +1,19 @@
+Aqui vou colocar as anotações relacionadas ao client side do curso do algaWorks
+
+
+Requisições HTTP utilizando json-server (github ) json-server --watch data/db.json
+
+
+ng g c <nomeComponente> --spec=false --inline-template --inline-style
+
+import { NgxCurrencyModule } from "ngx-currency";
+
+
+java -jar algamoney-api-1.0.0-SNAPSHOT.jar --spring.datasource.username=root --spring.datasource.password=123456 --algamoney.origin-permitida=http://localhost:4200 spring.profiles.active=oauth-security
+
+
+
+Para fazer o Login a API deve fornecer qual o clientID e o SECRET para colocar no Headers na requisição.
+
+
+

@@ -1,0 +1,54 @@
+{
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Petropolis"
+    },
+    {
+      "id": 2,
+      "nome": "Laranjal"
+    },
+    {
+      "nome": "Belo Horizonte",
+      "id": 3
+    },
+    {
+      "nome": "Petrópolis",
+      "id": 4
+    },
+    {
+      "nome": "Rio de Janeiro",
+      "id": 5
+    },
+    {
+      "nome": "Nova York",
+      "id": 6
+    },
+    {
+      "nome": "Los angels",
+      "id": 8
+    },
+    {
+      "nome": "Tokio",
+      "id": 9
+    },
+    {
+      "nome": "SpringField",
+      "id": 10
+    },
+    {
+      "nome": "cidad del lest",
+      "id": 11
+    }
+  ],
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "Pedrinho"
+    },
+    {
+      "id": 2,
+      "nome": "Larissinha"
+    }
+  ]
+}
