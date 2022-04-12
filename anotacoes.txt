@@ -16,4 +16,7 @@ java -jar algamoney-api-1.0.0-SNAPSHOT.jar --spring.datasource.username=root --s
 Para fazer o Login a API deve fornecer qual o clientID e o SECRET para colocar no Headers na requisição.
 
 
+npm install chart.js --save (para os dashboards na area de trabalho)
+
+
 
