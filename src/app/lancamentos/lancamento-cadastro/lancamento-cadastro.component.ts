@@ -115,6 +115,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   validarObrigatoriedade(input: FormControl) {
+    // Exemplo para referencias de outros campos ->  const dtVencimento=input.root.get('dataVencimento').value;
     return input.value ? null : { obrigatoriedade: true };
   }
 
@@ -193,10 +194,10 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch((erro) => this.errorHandler.handle(erro));
   }
 
-   removerAnexo() {
+  removerAnexo() {
     this.formulario.patchValue({
       anexo: null,
-      urlAnexo: null
+      urlAnexo: null,
     });
   }
 
