@@ -10,7 +10,9 @@
           name="tipo"
           [options]="tipos"
           formControlName="tipo"
+          #tipo
         ></p-selectButton>
+        <div>{{ tipo.value }}</div>
       </div>
 
       <div class="p-col-6 p-md-3 p-fluid">
@@ -20,7 +22,7 @@
           dateFormat="dd/mm/yy"
           [inline]="false"
           [readonlyInput]="false"
-          [showIcon]="false"
+          [showIcon]="true"
           formControlName="dataVencimento"
         ></p-calendar>
         <app-message
@@ -37,6 +39,7 @@
             : "Pagamento"
         }}</label>
         <p-calendar
+          [showIcon]="true"
           dateFormat="dd/mm/yy"
           name="dataPagamento"
           formControlName="dataPagamento"
@@ -69,6 +72,7 @@
       <div class="p-col-12 p-md-3 p-fluid">
         <label>Valor</label>
         <input
+          #valor
           pInputText
           type="text"
           name="valor"
@@ -114,19 +118,37 @@
           formControlName="observacao"
         ></textarea>
       </div>
+      <div>
+        <label>Valor de conversão</label>
+        {{ calcularValor() | number: "1.2-2" }}
+      </div>
+      <div>
+        <label>Valor de Disponivel</label>
+        {{ calcularDisponibilidade() | number: "1.2-2" }}
+      </div>
 
-     <div class="p-col-6 p-col-offset-6 p-md-2 p-md-offset-10 p-fluid"
-        *ngIf="!formulario.get('anexo').value">
-        <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="10485760"
-          chooseLabel="Anexar" accept="image/*,application/*"
+      <div
+        class="p-col-6 p-col-offset-6 p-md-2 p-md-offset-10 p-fluid"
+        *ngIf="!formulario.get('anexo').value"
+      >
+        <p-fileUpload
+          name="anexo"
+          mode="basic"
+          auto="true"
+          maxFileSize="10485760"
+          chooseLabel="Anexar"
+          accept="image/*,application/*"
           [url]="urlUploadAnexo"
           (onBeforeUpload)="antesUploadAnexo()"
           (onUpload)="aoTerminarUploadAnexo($event)"
           (onError)="erroUpload($event)"
-          [hidden]="uploadEmAndamento"></p-fileUpload>
+          [hidden]="uploadEmAndamento"
+        ></p-fileUpload>
 
-          <p-progressSpinner [hidden]="!uploadEmAndamento"
-            [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
+        <p-progressSpinner
+          [hidden]="!uploadEmAndamento"
+          [style]="{ width: '25px', height: '25px' }"
+        ></p-progressSpinner>
       </div>
 
       <div
@@ -134,9 +156,15 @@
         dir="rtl"
         *ngIf="formulario.get('anexo').value"
       >
-        <button pButton type="button" class="p-button-danger p-fluid p-button-icon-only"
-          icon="pi pi-times" pTooltip="Remover anexo" tooltipPosition="top"
-          (click)="removerAnexo()"></button>
+        <button
+          pButton
+          type="button"
+          class="p-button-danger p-fluid p-button-icon-only"
+          icon="pi pi-times"
+          pTooltip="Remover anexo"
+          tooltipPosition="top"
+          (click)="removerAnexo()"
+        ></button>
         <a
           target="_blank"
           pTooltip="Baixar anexo"

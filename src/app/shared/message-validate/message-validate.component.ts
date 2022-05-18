@@ -1,12 +1,10 @@
+import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: "app-message",
+  selector: "app-message-validate",
   template: `
-    <div *ngIf="temErro()" class="p-message p-message-error">
-      {{ text }}
-    </div>
+    <p-message *ngIf="temErro()" severity="error" text="{{ text }}"></p-message>
   `,
   styles: [
     `
@@ -18,7 +16,7 @@ import { Component, OnInit, Input } from "@angular/core";
     `,
   ],
 })
-export class MessageComponent {
+export class MessageValidateComponent {
   @Input() error: string;
   @Input() control: FormControl;
   @Input() text: string;

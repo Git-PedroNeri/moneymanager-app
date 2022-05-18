@@ -27,10 +27,14 @@ export class LancamentoCadastroComponent implements OnInit {
     { label: "Despesa", value: "DESPESA" },
   ];
 
+  totalOrcamento = 100000;
+  valorDisponivel = this.totalOrcamento;
+  tx_conversao = 5.9;
   categorias = [];
   pessoas = [];
   // lancamento = new Lancamento();
   formulario: FormGroup;
+
   uploadEmAndamento = false;
 
   constructor(
@@ -58,6 +62,17 @@ export class LancamentoCadastroComponent implements OnInit {
 
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  calcularDisponibilidade() {
+    this.valorDisponivel =
+      this.totalOrcamento - this.formulario.get("valor").value;
+    return this.valorDisponivel;
+  }
+  v;
+
+  calcularValor() {
+    return this.formulario.get("valor").value * this.tx_conversao;
   }
 
   antesUploadAnexo() {
@@ -94,7 +109,7 @@ export class LancamentoCadastroComponent implements OnInit {
       codigo: [],
       tipo: ["RECEITA", Validators.required],
       dataVencimento: [null, Validators.required],
-      dataPagamento: [],
+      dataPagamento: [new Date()],
       descricao: [
         null,
         [this.validarObrigatoriedade, this.validarTamanhoMinimo(5)],

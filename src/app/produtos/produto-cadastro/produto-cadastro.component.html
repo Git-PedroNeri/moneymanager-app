@@ -1,0 +1,98 @@
+<div class="container">
+  <form
+    autocomplete="off"
+    #formulario="ngForm"
+    [formGroup]="produtoForm"
+    (ngSubmit)="cadastrar(produtoForm)"
+  >
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>Produtos</h1>
+      </div>
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Descrição</label>
+        <input
+          pInputText
+          type="text"
+          name="descricao"
+          formControlName="descricao"
+        />
+        <app-message-validate
+          [control]="produtoForm.get('descricao')"
+          error="required"
+          text="Preencha uma descrição"
+        ></app-message-validate>
+        <app-message-validate
+          [control]="produtoForm.get('descricao')"
+          error="minlength"
+          text="Minimo de 10 caracteres"
+        ></app-message-validate>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label> Nome </label>
+        <input pInputText type="text" name="nome" formControlName="nome" />
+        <app-message-validate
+          [control]="produtoForm.get('nome')"
+          error="required"
+          text="Preencha o nome"
+        ></app-message-validate>
+        <app-message-validate
+          [control]="produtoForm.get('nome')"
+          error="notStartsWithA"
+          text="Deve comecar com A"
+        ></app-message-validate>
+        <app-message-validate
+          [control]="produtoForm.get('nome')"
+          error="tamanhoMinimo"
+          text="Deve possuir {{
+            produtoForm.get('nome').errors?.tamanhoMinimo?.tamanho
+          }} caracteres"
+        ></app-message-validate>
+      </div>
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Valor</label>
+        <input pInputText type="number" name="valor" formControlName="valor" />
+        <app-message-validate
+          [control]="produtoForm.get('valor')"
+          error="disponibilidadeFinanceira"
+          text="Máximo de recurso disponivel {{ totalValorProjeto }}"
+        ></app-message-validate>
+      </div>
+      <div class="p-col-12 p-md-9 p-fluid" formGroupName="categoriaProduto">
+        <label>Categoria</label>
+        <p-dropdown
+          [filter]="true"
+          filterBy="label"
+          name="categoriaProduto"
+          [options]="categoriaProdutoSelectItem"
+          placeholder="Selecione"
+          formControlName="categoriaProdutoId"
+        ></p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-9 p-fluid" formGroupName="country">
+        <label>Paises</label>
+        <p-dropdown
+          [filter]="true"
+          filterBy="label"
+          name="country"
+          [options]="countriesSelectItem"
+          placeholder="Selecione"
+          formControlName="code"
+        ></p-dropdown>
+      </div>
+      <div
+        class="p-col-12 p-md-9 p-fluid"
+        formGroupName="categoriaProduto"
+      ></div>
+      <div class="p-col-12">
+        <button
+          [disabled]="produtoForm.invalid"
+          pButton
+          type="submit"
+          label="Cadastrar"
+        ></button>
+      </div>
+    </div>
+  </form>
+</div>

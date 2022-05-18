@@ -1,47 +1,60 @@
 <div class="container">
-  <div class="p-grid">
-
-    <form autocomplete="off" (ngSubmit)="pesquisar()">
-
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="p-grid">
       <div class="p-col-12">
         <h1>Lançamentos</h1>
       </div>
 
       <div class="p-col-12 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="descricao"
-          [(ngModel)]="filtro.descricao">
+        <input
+          pInputText
+          type="text"
+          name="descricao"
+          [(ngModel)]="filtro.descricao"
+        />
       </div>
 
-      <div class="p-col-12">
-        <label style="display: block">Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-          name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
-
-        <label>até</label>
-        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-          name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label style="display: block">De</label>
+        <p-calendar
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          name="vencimentoInicio"
+          [(ngModel)]="filtro.dataVencimentoInicio"
+        ></p-calendar>
+      </div>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Até</label>
+        <p-calendar
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          name="vencimentoFim"
+          [(ngModel)]="filtro.dataVencimentoFim"
+        ></p-calendar>
       </div>
 
       <div class="p-col-12">
         <button pButton type="submit" label="Pesquisar"></button>
       </div>
-
-    </form>
-  </div>
+    </div>
+  </form>
 
   <div class="p-grid">
     <div class="p-col-12">
-      <p-table [value]="lancamentos" [responsive]="true"
-          [paginator]="true" [rows]="filtro.itensPorPagina"
-          [lazy]="true" [totalRecords]="totalRegistros"
-          (onLazyLoad)="aoMudarPagina($event)"
-          #tabela>
+      <p-table
+        [value]="lancamentos"
+        [responsive]="true"
+        [paginator]="true"
+        [rows]="filtro.itensPorPagina"
+        [lazy]="true"
+        [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela
+      >
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="6">
-              Nenhum lançamento encontrado
-            </td>
+            <td colspan="6">Nenhum lançamento encontrado</td>
           </tr>
         </ng-template>
         <ng-template pTemplate="header">
@@ -66,23 +79,36 @@
             </td>
             <td class="col-data">
               <span class="p-column-title">Vencimento</span>
-              {{ lancamento.dataVencimento | date:'dd/MM/yyyy' }}
+              {{ lancamento.dataVencimento | date: "dd/MM/yyyy" }}
             </td>
             <td class="col-data">
               <span class="p-column-title">Pagamento</span>
-              {{ lancamento.dataPagamento | date:'dd/MM/yyyy' }}
+              {{ lancamento.dataPagamento | date: "dd/MM/yyyy" }}
             </td>
             <td class="col-valor">
               <span class="p-column-title">Valor</span>
-              <span [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor | number:'1.2-2' }}</span>
+              <span
+                [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'"
+                >{{ lancamento.valor | number: "1.2-2" }}</span
+              >
             </td>
             <td class="col-acoes">
               <span class="p-column-title"></span>
-              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/lancamentos', lancamento.codigo]"></a>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+              <a
+                pButton
+                icon="pi pi-pencil"
+                pTooltip="Editar"
+                tooltipPosition="top"
+                [routerLink]="['/lancamentos', lancamento.codigo]"
+              ></a>
+              <button
+                pButton
+                icon="pi pi-trash"
+                pTooltip="Excluir"
+                tooltipPosition="top"
                 (click)="confirmarExclusao(lancamento)"
-                [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')"></button>
+                [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')"
+              ></button>
             </td>
           </tr>
         </ng-template>
@@ -92,7 +118,5 @@
     <div class="p-col-12">
       <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"></a>
     </div>
-
   </div>
-
 </div>

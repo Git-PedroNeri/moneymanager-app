@@ -1,0 +1,135 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>Produtos</h1>
+      </div>
+      <div class="p-col-12 p-fluid">
+        <label>Descrição</label>
+        <input
+          pInputText
+          type="text"
+          name="descricao"
+          [(ngModel)]="filtro.descricao"
+        />
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label> Nome </label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome" />
+      </div>
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Valor</label>
+        <input pInputText type="number" name="valor" />
+      </div>
+
+      <div>
+        <div class="p-col-12">
+          <label style="display: block">Data Cadastro</label>
+          <p-calendar
+            dateFormat="dd/mm/yy"
+            [inputStyle]="{ width: '95px' }"
+            name="dtCadastroInicio"
+          ></p-calendar>
+
+          <label>até</label>
+          <p-calendar
+            dateFormat="dd/mm/yy"
+            [inputStyle]="{ width: '95px' }"
+            name="dtCadastroFim"
+          ></p-calendar>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Categoria</label>
+        <p-dropdown
+          name="categoria"
+          [options]="categoriProdutoSelectItem"
+          placeholder="Selecione"
+          [(ngModel)]="filtro.categoriaProdutoId"
+        ></p-dropdown>
+      </div>
+      <div class="p-col-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+  <div class="p-grid">
+    <div class="p-col-12">
+      <!---------------------------------------------------------------------------------------------------------- TABLE--------------------------------------- -->
+      <p-table
+        [value]="produtos"
+        [responsive]="true"
+        [paginator]="true"
+        [rows]="ITENS_POR_PAGINA"
+        [lazy]="true"
+        [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela
+      >
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">Nenhum Produto encontrado</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-data-header">Descrição</th>
+            <th class="col-data-header">Nome</th>
+            <th class="col-data-header">Categoria</th>
+            <th class="col-data-header">Preco</th>
+            <th class="col-data-header">Data Cadastro</th>
+            <th class="col-acoes-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+          <tr>
+            <td>
+              <span class="p-column-title">Descrição</span>
+              {{ produto.descricao }}
+            </td>
+            <td>
+              <span class="p-column-title">Nome</span>
+              {{ produto.nome }}
+            </td>
+            <td>
+              <span class="p-column-title">Catergoria</span>
+              {{ produto.categoriaProduto.nome }}
+            </td>
+            <td class="col-valor">
+              <span class="p-column-title">Preço</span>
+              <span>{{ produto.preco | number: "1.2-2" }}</span>
+            </td>
+            <td class="col-data">
+              <span class="p-column-title">Data Cadastro</span>
+              {{ produto.dataCadastro | date: "dd/MM/yyyy" }}
+            </td>
+            <td class="col-acoes">
+              <span class="p-column-title"></span>
+              <a
+                pButton
+                icon="pi pi-pencil"
+                pTooltip="Editar"
+                tooltipPosition="top"
+                [routerLink]="['/produtos', produto.codigo]"
+              ></a>
+              <button
+                pButton
+                icon="pi pi-trash"
+                pTooltip="Excluir"
+                tooltipPosition="top"
+                (click)="confirmarExclusao(produto)"
+                [disabled]="!auth.temPermissao('ROLE_REMOVER_PRODUTO')"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="p-col-12">
+      <a pButton label="Novo Produto" routerLink="/produtos/novo"></a>
+    </div>
+  </div>
+</div>
