@@ -5,7 +5,12 @@ import { ErrorHandlerService } from "app/core/error-handler.service";
 import { AuthService } from "app/seguranca/auth.service";
 import { ConvertUtil } from "app/shared/converts/convert-util";
 import { environment } from "environments/environment";
-import { LazyLoadEvent, SelectItem } from "primeng/api";
+import {
+  ConfirmationService,
+  LazyLoadEvent,
+  MessageService,
+  SelectItem,
+} from "primeng/api";
 import { Table } from "primeng/table";
 import { FiltroProdutoDTO } from "../model/filter/filtroProdutoDTO";
 import { ProdutoService } from "../services/produto.service";
@@ -20,6 +25,8 @@ export class ProdutosPesquisaComponent implements OnInit {
     { id: 1, nome: "HIGIENE" },
     { id: 2, nome: "ALIMENTAÇÃO" },
     { id: 3, nome: "ELETRÔNICOS" },
+    { id: 4, nome: "ROUPAS" },
+    { id: 5, nome: "ACESSORIOS" },
   ];
 
   categoriProdutoSelectItem: SelectItem[] = [];
@@ -30,6 +37,8 @@ export class ProdutosPesquisaComponent implements OnInit {
   @ViewChild("tabela") grid: Table;
 
   constructor(
+    private confirmation: ConfirmationService,
+    private messageService: MessageService,
     protected injector: Injector,
     private produtoService: ProdutoService,
     public auth: AuthService,
@@ -53,7 +62,6 @@ export class ProdutosPesquisaComponent implements OnInit {
   }
 
   pesquisar(pagina = 0) {
-    console.log(this.filtro);
     this.filtro.pagina = pagina;
     this.produtoService
       .pesquisar(this.filtro)
@@ -68,6 +76,29 @@ export class ProdutosPesquisaComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
-  confirmarExclusao(produto: any) {}
-  excluir(produto: any) {}
+  confirmarExclusao(produto: any) {
+    this.confirmation.confirm({
+      message: "Tem certeza que deseja excluir?",
+      accept: () => {
+        this.excluir(produto);
+      },
+    });
+  }
+  excluir(produto: any) {
+    this.produtoService
+      .remover(produto.id)
+      .then(() => {
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.reset();
+        }
+
+        this.messageService.add({
+          severity: "success",
+          detail: "Produto excluído com sucesso!",
+        });
+      })
+      .catch((erro) => this.errorHandler.handle(erro));
+  }
 }

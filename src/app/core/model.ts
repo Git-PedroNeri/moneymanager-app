@@ -27,7 +27,7 @@ export class Contato {
   }
 }
 
-export class Country {
+export class Pais {
   name: string;
   code: string;
 }

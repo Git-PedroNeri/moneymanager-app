@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import * as moment from "moment";
 import { FiltroProdutoDTO } from "../model/filter/filtroProdutoDTO";
+import { Produto } from "../model/produto";
 
 @Injectable({ providedIn: "root" })
 export class ProdutoService {
@@ -16,7 +17,6 @@ export class ProdutoService {
     let params = new HttpParams()
       .set("page", filtro.pagina.toString())
       .set("size", environment.itensPorPagina.toString());
-
     if (filtro.descricao) {
       params = params.set("descricao", filtro.descricao);
     }
@@ -29,23 +29,26 @@ export class ProdutoService {
     if (filtro.nome) {
       params = params.set("nome", filtro.nome);
     }
+    if (filtro.paisCode) {
+      params = params.set("paisCode", filtro.paisCode);
+    }
 
-    if (filtro.dtInicioCriacao) {
+    if (filtro.dtCadastroFim) {
       params = params.set(
-        "dtInicioCriacao",
-        moment(filtro.dtInicioCriacao).format("YYYY-MM-DD")
+        "dtCadastroFim",
+        moment(filtro.dtCadastroFim).format("YYYY-MM-DD")
       );
     }
 
-    if (filtro.dtFimCriacao) {
+    if (filtro.dtCadastroInicio) {
       params = params.set(
-        "dtCriacao",
-        moment(filtro.dtFimCriacao).format("YYYY-MM-DD")
+        "dtCadastroInicio",
+        moment(filtro.dtCadastroInicio).format("YYYY-MM-DD")
       );
     }
 
     return this.http
-      .get(`${this.produtosUrl}?resumo`, { params })
+      .get(`${this.produtosUrl}`, { params })
       .toPromise()
       .then((response) => {
         const produtos = response["content"];
@@ -57,5 +60,16 @@ export class ProdutoService {
 
         return resultado;
       });
+  }
+
+  remover(codigo: number): Promise<void> {
+    return this.http
+      .delete(`${this.produtosUrl}/${codigo}`)
+      .toPromise()
+      .then(() => null);
+  }
+
+  cadastrar(produto: any): Promise<Produto> {
+    return this.http.post<Produto>(this.produtosUrl, produto).toPromise();
   }
 }

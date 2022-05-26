@@ -33,6 +33,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.title.setTitle('Pesquisa de lançamentos');
   }
 
+// caso o parametro  passe null ele considera a pagina =0, caso passe algo, esse algo que é considerado
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
 

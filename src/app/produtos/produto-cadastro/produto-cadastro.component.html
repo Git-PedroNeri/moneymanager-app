@@ -3,7 +3,7 @@
     autocomplete="off"
     #formulario="ngForm"
     [formGroup]="produtoForm"
-    (ngSubmit)="cadastrar(produtoForm)"
+    (ngSubmit)="cadastrar()"
   >
     <div class="p-grid">
       <div class="p-col-12">
@@ -51,10 +51,10 @@
         ></app-message-validate>
       </div>
       <div class="p-col-6 p-md-3 p-fluid">
-        <label>Valor</label>
-        <input pInputText type="number" name="valor" formControlName="valor" />
+        <label>Valor do Produto</label>
+        <input pInputText type="number" name="preco" formControlName="preco" />
         <app-message-validate
-          [control]="produtoForm.get('valor')"
+          [control]="produtoForm.get('preco')"
           error="disponibilidadeFinanceira"
           text="Máximo de recurso disponivel {{ totalValorProjeto }}"
         ></app-message-validate>
@@ -70,12 +70,12 @@
           formControlName="categoriaProdutoId"
         ></p-dropdown>
       </div>
-      <div class="p-col-12 p-md-9 p-fluid" formGroupName="country">
+      <div class="p-col-12 p-md-9 p-fluid" formGroupName="pais">
         <label>Paises</label>
         <p-dropdown
           [filter]="true"
           filterBy="label"
-          name="country"
+          name="pais"
           [options]="countriesSelectItem"
           placeholder="Selecione"
           formControlName="code"

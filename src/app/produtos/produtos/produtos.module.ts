@@ -22,6 +22,7 @@ import { ProdutoCadastroComponent } from "./../produto-cadastro/produto-cadastro
 import { ProdutosRoutingModule } from "./produtos-routing.module";
 
 @NgModule({
+  exports: [ProdutosPesquisaComponent],
   declarations: [ProdutoCadastroComponent, ProdutosPesquisaComponent],
   imports: [
     CommonModule,

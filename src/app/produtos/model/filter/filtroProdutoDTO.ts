@@ -8,7 +8,8 @@ export class FiltroProdutoDTO extends BaseFiltroModel {
   categoriaProduto:CategoriaProduto;
   categoriaProdutoId:any
   preco: any;
-  dtInicioCriacao: Date;
-  dtFimCriacao: Date;
+  dtCadastroFim: Date;
+  dtCadastroInicio: Date;
+  paisCode: string;
   pagina = 0;
 }

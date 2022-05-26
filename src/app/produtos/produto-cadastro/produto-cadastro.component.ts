@@ -5,9 +5,12 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { Country } from "app/core/model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ErrorHandlerService } from "app/core/error-handler.service";
+import { Pais } from "app/core/model";
 import { ConvertUtil } from "app/shared/converts/convert-util";
 import { MessageService, SelectItem } from "primeng/api";
+import { ProdutoService } from "../services/produto.service";
 
 @Component({
   selector: "app-produto-cadastro",
@@ -15,9 +18,9 @@ import { MessageService, SelectItem } from "primeng/api";
   styleUrls: ["./produto-cadastro.component.css"],
 })
 export class ProdutoCadastroComponent implements OnInit {
-  countries: Country[];
+  countries: Pais[];
 
-  selectedCountry: Country;
+  selectedPais: Pais;
   countriesSelectItem: SelectItem[];
   categoriaProdutoSelectItem: SelectItem[];
   produtoForm: FormGroup;
@@ -30,7 +33,14 @@ export class ProdutoCadastroComponent implements OnInit {
     { id: 3, nome: "ELETRÔNICOS" },
   ];
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {
+  constructor(
+    private errorHandler: ErrorHandlerService,
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private produtoService: ProdutoService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.countries = [
       { name: "Australia", code: "AU" },
       { name: "Brazil", code: "BR" },
@@ -109,14 +119,14 @@ export class ProdutoCadastroComponent implements OnInit {
           this.devePossuirMinimoDe(10),
         ],
       ],
-      valor: [
+      preco: [
         null,
         [
           Validators.required,
           this.validarDisponibilidadeFinanceira(this.totalValorProjeto),
         ],
       ],
-      country: this.fb.group({
+      pais: this.fb.group({
         name: [null],
         code: [null, Validators.required],
       }),
@@ -124,14 +134,22 @@ export class ProdutoCadastroComponent implements OnInit {
         categoriaProdutoId: [null, Validators.required],
         nome: [],
       }),
-      observacao: [],
-      anexo: [],
-      urlAnexo: [],
     });
   }
 
-  cadastrar(form: any) {
-    this.showError();
-    console.log(form);
+  cadastrar() {
+    this.produtoService
+      .cadastrar(this.produtoForm.value)
+      .then((produtoAdicionado) => {
+        this.messageService.add({
+          severity: "success",
+          detail: "Produto adicionado com sucesso!",
+        });
+
+        // form.reset();
+        // this.lancamento = new Lancamento();
+        this.router.navigate(["/produtos"]);
+      })
+      .catch((erro) => this.errorHandler.handle(erro));
   }
 }

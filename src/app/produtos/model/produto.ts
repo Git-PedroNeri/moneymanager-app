@@ -1,4 +1,4 @@
-import { CategoriaProduto } from "app/core/model";
+import { CategoriaProduto, Pais } from "app/core/model";
 
 export class Produto {
   id?: string;
@@ -7,10 +7,11 @@ export class Produto {
   preco?: number;
   dataCadastro: Date;
   categoriaProduto = new CategoriaProduto();
+  categoriaProdutoId:number;
+  pais = new Pais();
   quantity?: number;
   inventoryStatus?: string;
   category?: string;
   image?: string;
   rating?: number;
 }
-

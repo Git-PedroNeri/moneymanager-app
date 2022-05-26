@@ -2,7 +2,7 @@
   <form autocomplete="off" (ngSubmit)="pesquisar()">
     <div class="p-grid">
       <div class="p-col-12">
-        <h1>Produtos</h1>
+        <h1>Pesquisa de Produtos</h1>
       </div>
       <div class="p-col-12 p-fluid">
         <label>Descrição</label>
@@ -23,22 +23,21 @@
         <input pInputText type="number" name="valor" />
       </div>
 
-      <div>
-        <div class="p-col-12">
-          <label style="display: block">Data Cadastro</label>
-          <p-calendar
-            dateFormat="dd/mm/yy"
-            [inputStyle]="{ width: '95px' }"
-            name="dtCadastroInicio"
-          ></p-calendar>
-
-          <label>até</label>
-          <p-calendar
-            dateFormat="dd/mm/yy"
-            [inputStyle]="{ width: '95px' }"
-            name="dtCadastroFim"
-          ></p-calendar>
-        </div>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label style="display: block">Data Inicio</label>
+        <p-calendar
+          dateFormat="dd/mm/yy"
+          name="dtCadastroInicio"
+          [(ngModel)]="filtro.dtCadastroInicio"
+        ></p-calendar>
+      </div>
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Data Fim</label>
+        <p-calendar
+          dateFormat="dd/mm/yy"
+          name="dtCadastroFim"
+          [(ngModel)]="filtro.dtCadastroFim"
+        ></p-calendar>
       </div>
 
       <div class="p-col-12 p-md-6 p-fluid">
@@ -79,6 +78,7 @@
             <th class="col-data-header">Nome</th>
             <th class="col-data-header">Categoria</th>
             <th class="col-data-header">Preco</th>
+            <th class="col-data-header">Pais</th>
             <th class="col-data-header">Data Cadastro</th>
             <th class="col-acoes-header"></th>
           </tr>
@@ -100,6 +100,10 @@
             <td class="col-valor">
               <span class="p-column-title">Preço</span>
               <span>{{ produto.preco | number: "1.2-2" }}</span>
+            </td>
+            <td>
+              <span class="p-column-title">Pais</span>
+              {{ produto.pais.code }}
             </td>
             <td class="col-data">
               <span class="p-column-title">Data Cadastro</span>
