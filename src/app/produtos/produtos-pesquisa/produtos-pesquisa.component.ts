@@ -15,6 +15,11 @@ import { Table } from "primeng/table";
 import { FiltroProdutoDTO } from "../model/filter/filtroProdutoDTO";
 import { ProdutoService } from "../services/produto.service";
 
+class City {
+  name: string;
+  code: string;
+}
+
 @Component({
   selector: "app-produtos-pesquisa",
   templateUrl: "./produtos-pesquisa.component.html",
@@ -28,6 +33,10 @@ export class ProdutosPesquisaComponent implements OnInit {
     { id: 4, nome: "ROUPAS" },
     { id: 5, nome: "ACESSORIOS" },
   ];
+
+  cities: City[];
+
+  selectedCities: City[];
 
   categoriProdutoSelectItem: SelectItem[] = [];
   totalRegistros = 0;
@@ -51,6 +60,14 @@ export class ProdutosPesquisaComponent implements OnInit {
       "id",
       "Selecione"
     );
+
+    this.cities = [
+      { name: "New York", code: "NY" },
+      { name: "Rome", code: "RM" },
+      { name: "London", code: "LDN" },
+      { name: "Istanbul", code: "IST" },
+      { name: "Paris", code: "PRS" },
+    ];
   }
 
   public cleanForm() {

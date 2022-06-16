@@ -15,6 +15,7 @@ import { MessagesModule } from "primeng/messages";
 import { PanelModule } from "primeng/panel";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { TableModule } from "primeng/table";
+import { MultiSelectModule } from "primeng/multiselect";
 import { ToastModule } from "primeng/toast";
 import { TooltipModule } from "primeng/tooltip";
 import { ProdutosPesquisaComponent } from "../produtos-pesquisa/produtos-pesquisa.component";
@@ -25,6 +26,7 @@ import { ProdutosRoutingModule } from "./produtos-routing.module";
   exports: [ProdutosPesquisaComponent],
   declarations: [ProdutoCadastroComponent, ProdutosPesquisaComponent],
   imports: [
+    MultiSelectModule,
     CommonModule,
     ProdutosRoutingModule,
     FormsModule,

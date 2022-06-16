@@ -3,11 +3,11 @@
     autocomplete="off"
     #formulario="ngForm"
     [formGroup]="produtoForm"
-    (ngSubmit)="cadastrar()"
+    (ngSubmit)="salvar()"
   >
     <div class="p-grid">
       <div class="p-col-12">
-        <h1>Produtos</h1>
+        <h1>{{ editando ? "Editar " : "Cadastar novo " }}Produto</h1>
       </div>
       <div class="p-col-12 p-md-6 p-fluid">
         <label>Descrição</label>
@@ -67,7 +67,7 @@
           name="categoriaProduto"
           [options]="categoriaProdutoSelectItem"
           placeholder="Selecione"
-          formControlName="categoriaProdutoId"
+          formControlName="id"
         ></p-dropdown>
       </div>
       <div class="p-col-12 p-md-9 p-fluid" formGroupName="pais">
@@ -90,8 +90,9 @@
           [disabled]="produtoForm.invalid"
           pButton
           type="submit"
-          label="Cadastrar"
+          [label]="editando ? 'Atualizar' : 'Cadastrar'"
         ></button>
+        <a pButton label="Pesquisar" routerLink="/produtos"></a>
       </div>
     </div>
   </form>

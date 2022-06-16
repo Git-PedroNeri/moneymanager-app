@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="p-col-12 p-md-6 p-fluid">
+    <label>MultiSelect</label>
+    <p-multiSelect
+      [options]="cities"
+      [(ngModel)]="selectedCities"
+      display="chip"
+      optionLabel="name"
+    ></p-multiSelect>
+  </div>
   <form autocomplete="off" (ngSubmit)="pesquisar()">
     <div class="p-grid">
       <div class="p-col-12">
@@ -116,7 +125,7 @@
                 icon="pi pi-pencil"
                 pTooltip="Editar"
                 tooltipPosition="top"
-                [routerLink]="['/produtos', produto.codigo]"
+                [routerLink]="['/produtos', produto.id, 'editar']"
               ></a>
               <button
                 pButton

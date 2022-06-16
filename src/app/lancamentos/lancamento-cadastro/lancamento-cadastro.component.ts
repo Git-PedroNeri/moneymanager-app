@@ -54,8 +54,6 @@ export class LancamentoCadastroComponent implements OnInit {
 
     const codigoLancamento = this.route.snapshot.params["codigo"];
 
-    console.log(codigoLancamento);
-
     this.title.setTitle("Novo lançamento");
 
     if (codigoLancamento) {

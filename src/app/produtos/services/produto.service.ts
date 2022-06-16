@@ -70,6 +70,23 @@ export class ProdutoService {
   }
 
   cadastrar(produto: any): Promise<Produto> {
+
     return this.http.post<Produto>(this.produtosUrl, produto).toPromise();
+  }
+
+  atualizar(produto: any): Promise<Produto> {
+    return this.http
+      .put<Produto>(`${this.produtosUrl}/${produto.id}/editar`, produto)
+      .toPromise();
+  }
+
+  busrcarPorId(id: number): Promise<Produto> {
+    return this.http
+      .get<Produto>(`${this.produtosUrl}/${id}/consulta`)
+      .toPromise()
+      .then((response) => {
+        const produto = response;
+        return produto;
+      });
   }
 }

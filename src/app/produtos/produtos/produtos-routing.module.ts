@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "app/seguranca/auth.guard";
 import { ProdutoCadastroComponent } from "../produto-cadastro/produto-cadastro.component";
-import { ProdutosPesquisaComponent } from '../produtos-pesquisa/produtos-pesquisa.component';
+import { ProdutosPesquisaComponent } from "../produtos-pesquisa/produtos-pesquisa.component";
 
 const routes: Routes = [
   {
@@ -12,13 +12,13 @@ const routes: Routes = [
     data: { roles: ["ROLE_PESQUISAR_PRODUTO"] },
   },
   {
-    path: "nova",
+    path: "novo",
     component: ProdutoCadastroComponent,
     canActivate: [AuthGuard],
     data: { roles: ["ROLE_CADASTRAR_PRODUTO"] },
   },
   {
-    path: ":codigo",
+    path: ":id/editar",
     component: ProdutoCadastroComponent,
     canActivate: [AuthGuard],
     data: { roles: ["ROLE_CADASTRAR_PRODUTO"] },

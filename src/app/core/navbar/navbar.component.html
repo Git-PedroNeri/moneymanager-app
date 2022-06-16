@@ -52,7 +52,15 @@
       (click)="exibindoMenu = !exibindoMenu"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"
     >
-      <a routerLink="/relatorios/lancamentos">Relatório</a>
+      <a routerLink="/relatorios/lancamentos">Relatório Lancamento</a>
+    </li>
+    <li
+      class="navbar-menuitem"
+      routerLinkActive="ativo"
+      (click)="exibindoMenu = !exibindoMenu"
+      *ngIf="auth.temPermissao('ROLE_PESQUISAR_PRODUTO')"
+    >
+      <a routerLink="/relatorios/produtos">Relatório Produto</a>
     </li>
     <li class="navbar-menuitem">
       <a href="javascript:;" (click)="logout()">Logout</a>

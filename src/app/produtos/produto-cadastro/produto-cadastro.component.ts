@@ -5,9 +5,10 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ErrorHandlerService } from "app/core/error-handler.service";
-import { Pais } from "app/core/model";
+import { CategoriaProduto, Pais } from "app/core/model";
 import { ConvertUtil } from "app/shared/converts/convert-util";
 import { MessageService, SelectItem } from "primeng/api";
 import { ProdutoService } from "../services/produto.service";
@@ -19,21 +20,21 @@ import { ProdutoService } from "../services/produto.service";
 })
 export class ProdutoCadastroComponent implements OnInit {
   countries: Pais[];
+  categorias: CategoriaProduto[];
+
+  editando: boolean;
+
+  formulario: any;
 
   selectedPais: Pais;
   countriesSelectItem: SelectItem[];
   categoriaProdutoSelectItem: SelectItem[];
   produtoForm: FormGroup;
 
-  totalValorProjeto = 1000;
-
-  categorias = [
-    { id: 1, nome: "HIGIENE" },
-    { id: 2, nome: "ALIMENTAÇÃO" },
-    { id: 3, nome: "ELETRÔNICOS" },
-  ];
+  totalValorProjeto = 30000;
 
   constructor(
+    private title: Title,
     private errorHandler: ErrorHandlerService,
     private fb: FormBuilder,
     private messageService: MessageService,
@@ -41,6 +42,12 @@ export class ProdutoCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.categorias = [
+      { id: 1, nome: "HIGIENE" },
+      { id: 2, nome: "ALIMENTAÇÃO" },
+      { id: 3, nome: "ELETRÔNICOS" },
+    ];
+
     this.countries = [
       { name: "Australia", code: "AU" },
       { name: "Brazil", code: "BR" },
@@ -70,8 +77,32 @@ export class ProdutoCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle("Novo lançamento");
     // this.loadCategoriaProduto();
     this.initForm();
+
+    const produtoId = this.route.snapshot.params["id"];
+
+    if (produtoId) {
+      this.editando = true;
+      this.loadProduto(produtoId);
+      this.title.setTitle("Editar lançamento");
+      console.log(this.produtoForm.value);
+    }
+  }
+
+  loadProduto(id: number) {
+    this.produtoService
+      .busrcarPorId(id)
+      .then((produto) => {
+        console.log(produto.categoriaProduto);
+        console.log(this.produtoForm.value);
+        console.log(this.categoriaProdutoSelectItem);
+        console.log(this.countriesSelectItem);
+
+        this.produtoForm.patchValue(produto);
+      })
+      .catch((erro) => this.errorHandler.handle(erro));
   }
 
   showError() {
@@ -101,7 +132,6 @@ export class ProdutoCadastroComponent implements OnInit {
 
   validarDisponibilidadeFinanceira(teto: number) {
     return (input: FormControl) => {
-      console.log(input.value);
       return !input.value || input.value < teto
         ? false
         : { disponibilidadeFinanceira: true };
@@ -110,6 +140,7 @@ export class ProdutoCadastroComponent implements OnInit {
 
   initForm() {
     this.produtoForm = this.fb.group({
+      id: [],
       descricao: [null, [Validators.required, Validators.minLength(10)]],
       nome: [
         null,
@@ -131,15 +162,43 @@ export class ProdutoCadastroComponent implements OnInit {
         code: [null, Validators.required],
       }),
       categoriaProduto: this.fb.group({
-        categoriaProdutoId: [null, Validators.required],
+        id: [null, Validators.required],
         nome: [],
       }),
     });
+
+    console.log(this.produtoForm);
   }
 
-  cadastrar() {
+  salvar() {
+    if (this.editando) {
+      this.atualizarProduto();
+    } else {
+      this.adicionarProduto();
+    }
+  }
+
+  adicionarProduto() {
     this.produtoService
       .cadastrar(this.produtoForm.value)
+      .then((produtoAdicionado) => {
+        this.messageService.add({
+          severity: "success",
+          detail: "Produto adicionado com sucesso!",
+        });
+
+        // form.reset();
+        // this.lancamento = new Lancamento();
+        // this.router.navigate(["/produtos"]);
+
+        //Exemplo caso queria após salvar um novo produto eu possa ir para a edição seria :
+        this.router.navigate(["/produtos", produtoAdicionado.id, "editar"]);
+      })
+      .catch((erro) => this.errorHandler.handle(erro));
+  }
+  atualizarProduto() {
+    this.produtoService
+      .atualizar(this.produtoForm.value)
       .then((produtoAdicionado) => {
         this.messageService.add({
           severity: "success",

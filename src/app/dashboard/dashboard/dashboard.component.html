@@ -12,9 +12,41 @@
 
     <div class="p-col-12 p-md-6">
       <p-panel header="Lançamentos por dia">
-        <p-chart type="line" [data]="lineChartData" [options]="options"></p-chart>
+        <p-chart
+          type="line"
+          [data]="lineChartData"
+          [options]="options"
+        ></p-chart>
       </p-panel>
     </div>
 
+    <div class="p-col-12 p-md-6">
+      <p-panel header="Line Default">
+        <p-chart
+          type="line"
+          [data]="lineChartDataDefault"
+          [options]="options"
+        ></p-chart>
+      </p-panel>
+    </div>
+    <div class="p-col-12 p-md-6">
+      <p-panel header="Produtos por dia">
+        <p-chart
+          type="line"
+          [data]="lineChartDataProduto"
+          [options]="options"
+        ></p-chart>
+      </p-panel>
+    </div>
+
+    <div class="p-col-12 p-md-6">
+      <p-panel header="Pie Default">
+        <p-chart
+          type="pie"
+          [data]="pieChartDataDefault"
+          [options]="options"
+        ></p-chart>
+      </p-panel>
+    </div>
   </div>
 </div>
