@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -42,3 +43,21 @@ import { SegurancaModule } from "./seguranca/seguranca.module";
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+=======
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d

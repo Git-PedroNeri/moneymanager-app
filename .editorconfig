@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Editor configuration, see http://editorconfig.org
+=======
+# Editor configuration, see https://editorconfig.org
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 root = true
 
 [*]
@@ -8,6 +12,12 @@ indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+<<<<<<< HEAD
+=======
+[*.ts]
+quote_type = single
+
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false

@@ -4,10 +4,22 @@
 /dist
 /tmp
 /out-tsc
+<<<<<<< HEAD
+=======
+# Only exists if Bazel was run
+/bazel-out
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 
 # dependencies
 /node_modules
 
+<<<<<<< HEAD
+=======
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 # IDEs and editors
 /.idea
 .project
@@ -23,6 +35,10 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+<<<<<<< HEAD
+=======
+.history/*
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 
 # misc
 /.sass-cache
@@ -30,6 +46,7 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+<<<<<<< HEAD
 testem.log
 /typings
 
@@ -37,6 +54,12 @@ testem.log
 /e2e/*.js
 /e2e/*.map
 
+=======
+yarn-error.log
+testem.log
+/typings
+
+>>>>>>> ac15af8aaf74cf30c9450f5acda6854dec57680d
 # System Files
 .DS_Store
 Thumbs.db
