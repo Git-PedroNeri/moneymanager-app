@@ -13,6 +13,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { TableModule } from "primeng/table";
 import { UsuarioService } from "./usuario.service";
 import { UsuarioFormComponent } from "./usuario-form/usuario-form.component";
+import { PickListModule } from "primeng/picklist";
 
 @NgModule({
   declarations: [UsuarioSearchComponent, UsuarioFormComponent],
@@ -27,6 +28,7 @@ import { UsuarioFormComponent } from "./usuario-form/usuario-form.component";
     RadioButtonModule,
     InputTextModule,
     TableModule,
+    PickListModule,
   ],
   providers: [UsuarioService],
 })

@@ -1,7 +1,7 @@
 import { BaseEntity } from "app/shared/filters/base.entity";
 
 export class Perfil implements BaseEntity {
-  public codigo: string;
+  public id: string;
   public descricao: string;
 
   constructor() {}

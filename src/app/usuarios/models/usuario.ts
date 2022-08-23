@@ -6,12 +6,12 @@ export class Usuario implements BaseEntity {
   public nome: string;
   public email: string;
   public senha: string;
-  public perfil: Perfil[];
+  public perfis: Perfil[];
 
   public situacao: string;
 
   constructor() {
-    this.perfil = [];
+    this.perfis = [];
   }
 
   static fromJson(jsonData: any): Usuario {

@@ -1,4 +1,10 @@
-import { AfterContentChecked, Injector, OnInit } from "@angular/core";
+import {
+  AfterContentChecked,
+  Component,
+  Injectable,
+  Injector,
+  OnInit,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MessageService, ConfirmationService } from "primeng/api";
 import { Observable, Subject } from "rxjs";
@@ -7,7 +13,7 @@ import { BaseResourceModel } from "./../abstract/base-resource.model";
 import { BaseResourceService } from "./../abstract/base-resource.service";
 import { NgForm } from "@angular/forms";
 import { environment } from "environments/environment";
-
+@Injectable()
 export abstract class BaseResourceFormV2Component<T extends BaseResourceModel>
   implements OnInit, AfterContentChecked
 {

@@ -13,7 +13,6 @@ export class UsuarioService extends BaseResourceService<Usuario> {
   }
 
   buscarPerfis(): Observable<any> {
-    debugger;
     return this.http.get<any>(environment.apiUrl + "/buscarTodos");
   }
 }

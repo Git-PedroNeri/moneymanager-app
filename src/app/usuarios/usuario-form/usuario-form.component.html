@@ -1,1 +1,117 @@
-<p>usuario-form works!</p>
+<div class="container" style="padding-top: 20px">
+  <div class="ui-g ui-fluid">
+    <div>
+      <div class="card card-w-title">
+        <p-fieldset legend="{{ titulo }}">
+          <form #formResource="ngForm" novalidate>
+            <div class="p-grid form-group espacamento-input">
+              <div class="p-col-12 p-md-12 p-fluid">
+                <label class="label-filled" style="margin-top: 5px"
+                  >Nome:
+                </label>
+                <span class="md-inputfield">
+                  <input
+                    type="text"
+                    pInputText
+                    id="nome"
+                    name="nome"
+                    autocomplete="off"
+                    #nome="ngModel"
+                    required
+                    [(ngModel)]="resource.nome"
+                    minlength="5"
+                    maxlength="100"
+                  />
+                </span>
+              </div>
+              <div class="p-col-12 p-md-6 p-fluid">
+                <label class="label-filled" style="margin-top: 5px"
+                  >Login:
+                </label>
+                <span class="md-inputfield">
+                  <input
+                    type="text"
+                    id="login"
+                    pInputText
+                    autocomplete="off"
+                    name="login"
+                    #login="ngModel"
+                    [(ngModel)]="resource.email"
+                    minlength="5"
+                    maxlength="50"
+                    required
+                  />
+                </span>
+              </div>
+              <div class="p-col-12 p-md-6 p-fluid">
+                <label class="label-filled" style="margin-top: 5px"
+                  >Senha:</label
+                >
+                <span class="md-inputfield">
+                  <input
+                    type="text"
+                    id="login"
+                    pInputText
+                    autocomplete="off"
+                    name="login"
+                    #login="ngModel"
+                    [(ngModel)]="resource.senha"
+                    minlength="5"
+                    maxlength="50"
+                    required
+                  />
+                </span>
+              </div>
+            </div>
+            <div>
+              <p-pickList
+                [showSourceControls]="false"
+                [source]="perfis"
+                filterBy="descricao"
+                [target]="resource.perfis"
+                [showTargetControls]="false"
+                sourceHeader="Perfil"
+                targetHeader="Perfil Selecionado"
+                [responsive]="true"
+                dragdrop="true"
+                [sourceStyle]="{ height: '150px' }"
+                [targetStyle]="{ height: '150px' }"
+              >
+                <ng-template let-perfil pTemplate="item">
+                  <div class="ui-helper-clearfix">
+                    <div style="font-size: 14px">{{ perfil.descricao }}</div>
+                  </div>
+                </ng-template>
+              </p-pickList>
+            </div>
+          </form>
+
+          <div class="clearfix"></div>
+          <div class="ui-g-12 ui-md-12 alinhar-direita">
+            <p-button
+              type="button"
+              title="Voltar página"
+              id="voltar"
+              name="voltar"
+              label="Voltar"
+              icon="ui-icon-keyboard-return"
+              styleClass="ui-button-secondary"
+              (onClick)="voltar()"
+            ></p-button
+            >&nbsp;
+            <p-button
+              title="Salvar"
+              id="salvarItem"
+              label="Salvar"
+              type="submit"
+              (onClick)="submitForm(formResource)"
+              icon="ui-icon-save"
+              styleClass="ui-button-primary"
+              [disabled]="formResource.invalid"
+            ></p-button>
+          </div>
+        </p-fieldset>
+      </div>
+    </div>
+  </div>
+</div>
