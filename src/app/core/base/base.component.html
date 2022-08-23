@@ -1,0 +1,43 @@
+<p-toast key="default_notification"></p-toast>
+<div
+  class="layout-wrapper"
+  [ngClass]="{ 'layout-compact': layoutCompact }"
+  (click)="onLayoutClick()"
+>
+  <block-ui>
+    <div
+      #layoutContainer
+      class="layout-container"
+      [ngClass]="{
+        'menu-layout-static': !isOverlay(),
+        'menu-layout-overlay': isOverlay(),
+        'layout-menu-overlay-active': overlayMenuActive,
+        'menu-layout-horizontal': isHorizontal(),
+        'menu-layout-slim': isSlim(),
+        'layout-menu-static-inactive': staticMenuDesktopInactive,
+        'layout-menu-static-active': staticMenuMobileActive
+      }"
+    >
+      <!-- <base-topbar></base-topbar>
+
+            <div class="layout-menu" role="menubar" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick($event)">
+                <p-scrollPanel #scrollPanel [style]="{height: '100%'}">
+                    <base-menu [reset]="resetMenu"></base-menu>
+                </p-scrollPanel>
+            </div>
+            <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+            <div class="layout-main">
+                <base-breadcrumb></base-breadcrumb>
+
+                <div class="layout-content">
+                    <basis-page-notification role="alertdialog"></basis-page-notification>
+
+                    <router-outlet></router-outlet>
+
+                    <base-footer></base-footer>
+                </div>
+            </div> -->
+      <div class="layout-mask"></div>
+    </div>
+  </block-ui>
+</div>

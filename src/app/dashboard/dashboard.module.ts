@@ -1,24 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from "@angular/common";
+import { NgModule } from "@angular/core";
 
-import { PanelModule } from 'primeng/panel';
-import { ChartModule } from 'primeng/chart';
+import { ChartModule } from "primeng/chart";
+import { PanelModule } from "primeng/panel";
 
-import { SharedModule } from './../shared/shared.module';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { SharedModule } from "./../shared/shared.module";
+import { DashboardRoutingModule } from "./dashboard-routing.module";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+
+import { FieldsetModule } from "primeng/fieldset";
 
 @NgModule({
   imports: [
     CommonModule,
 
+    FieldsetModule,
+
     PanelModule,
     ChartModule,
 
     SharedModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
   ],
   declarations: [DashboardComponent],
-  providers: [ DecimalPipe ]
+  providers: [DecimalPipe],
 })
-export class DashboardModule { }
+export class DashboardModule {}

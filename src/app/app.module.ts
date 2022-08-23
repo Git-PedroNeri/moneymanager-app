@@ -1,21 +1,21 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TableModule } from "primeng/table";
 
-import { AppComponent } from "./app.component";
-import { CoreModule } from "./core/core.module";
-import { SegurancaModule } from "./seguranca/seguranca.module";
-import { AppRoutingModule } from "./app-routing.module";
-import { CardComponent } from "./card/card.component";
-import { CardModule } from "primeng/card";
-import { ButtonModule } from "primeng/button";
-import { ProdutosModule } from "./produtos/produtos/produtos.module";
-import { BlockUIModule } from "ng-block-ui";
-import { PanelModule } from "primeng/panel";
-import { RippleModule } from "primeng/ripple";
 import { FormsModule } from "@angular/forms";
 import { AccordionModule } from "@syncfusion/ej2-angular-navigations";
+import { BlockUIModule } from "ng-block-ui";
+import { ButtonModule } from "primeng/button";
+import { CardModule } from "primeng/card";
+import { PanelModule } from "primeng/panel";
+import { RippleModule } from "primeng/ripple";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { CardComponent } from "./card/card.component";
+import { CoreModule } from "./core/core.module";
+import { ProdutosModule } from "./produtos/produtos/produtos.module";
+import { SegurancaModule } from "./seguranca/seguranca.module";
 
 @NgModule({
   declarations: [AppComponent, CardComponent],
@@ -28,7 +28,6 @@ import { AccordionModule } from "@syncfusion/ej2-angular-navigations";
     AppRoutingModule,
     TableModule,
     CardModule,
-    ButtonModule,
     ProdutosModule,
     AccordionModule,
     BrowserModule,
@@ -38,6 +37,7 @@ import { AccordionModule } from "@syncfusion/ej2-angular-navigations";
     RippleModule,
     FormsModule,
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })

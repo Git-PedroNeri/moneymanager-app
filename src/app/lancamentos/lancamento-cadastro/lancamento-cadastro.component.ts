@@ -15,6 +15,7 @@ import { CategoriaService } from "./../../categorias/categoria.service";
 import { PessoaService } from "./../../pessoas/pessoa.service";
 import { Lancamento } from "./../../core/model";
 import { LancamentoService } from "./../lancamento.service";
+import { AuthService } from "app/seguranca/auth.service";
 
 @Component({
   selector: "app-lancamento-cadastro",
@@ -32,6 +33,7 @@ export class LancamentoCadastroComponent implements OnInit {
   tx_conversao = 5.9;
   categorias = [];
   pessoas = [];
+  usuarioLogado:string;
   // lancamento = new Lancamento();
   formulario: FormGroup;
 
@@ -46,10 +48,12 @@ export class LancamentoCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.usuarioLogado = this.authService.jwtPayload.user_name;
     this.configurarFormulario();
 
     const codigoLancamento = this.route.snapshot.params["codigo"];
@@ -68,10 +72,6 @@ export class LancamentoCadastroComponent implements OnInit {
     this.valorDisponivel =
       this.totalOrcamento - this.formulario.get("valor").value;
     return this.valorDisponivel;
-  }
-
-  calcularValor() {
-    return this.formulario.get("valor").value * this.tx_conversao;
   }
 
   antesUploadAnexo() {
@@ -113,7 +113,7 @@ export class LancamentoCadastroComponent implements OnInit {
         null,
         [this.validarObrigatoriedade, this.validarTamanhoMinimo(5)],
       ],
-      valor: [null, Validators.required],
+      valor: [0, Validators.required],
       pessoa: this.formBuilder.group({
         codigo: [null, Validators.required],
         nome: [],
@@ -125,6 +125,7 @@ export class LancamentoCadastroComponent implements OnInit {
       observacao: [],
       anexo: [],
       urlAnexo: [],
+      usuario:this.usuarioLogado,
     });
   }
 

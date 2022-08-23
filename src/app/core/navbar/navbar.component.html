@@ -17,7 +17,7 @@
     <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"
     >
       <a routerLink="/dashboard">Dashboard</a>
@@ -25,7 +25,7 @@
     <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"
     >
       <a routerLink="/lancamentos">Lançamentos</a>
@@ -33,34 +33,42 @@
     <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"
     >
       <a routerLink="/pessoas">Pessoas</a>
     </li>
-    <li
+    <!-- <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_PRODUTO')"
     >
       <a routerLink="/produtos">Produtos</a>
-    </li>
+    </li> -->
     <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"
     >
       <a routerLink="/relatorios/lancamentos">Relatório Lancamento</a>
     </li>
-    <li
+    <!-- <li
       class="navbar-menuitem"
       routerLinkActive="ativo"
-      (click)="exibindoMenu = !exibindoMenu"
+      (click)="exibindoMenu = true"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_PRODUTO')"
     >
       <a routerLink="/relatorios/produtos">Relatório Produto</a>
+    </li> -->
+    <li
+      class="navbar-menuitem"
+      routerLinkActive="ativo"
+      (click)="exibindoMenu = true"
+      *ngIf="auth.temPermissao('ROLE_CADASTRAR_USUARIO')"
+    >
+      <a routerLink="/usuarios">Usuários</a>
     </li>
     <li class="navbar-menuitem">
       <a href="javascript:;" (click)="logout()">Logout</a>

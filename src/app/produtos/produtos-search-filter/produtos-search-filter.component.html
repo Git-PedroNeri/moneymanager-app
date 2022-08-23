@@ -1,0 +1,59 @@
+<form
+  autocomplete="off"
+  #formFilter="ngForm"
+  (ngSubmit)="pesquisar(formFilter)"
+>
+  <div class="p-grid">
+    <div class="p-col-12">
+      <h1>Pesquisa de Produtos</h1>
+    </div>
+    <div class="p-col-12 p-fluid">
+      <label>Descrição</label>
+      <input
+        pInputText
+        type="text"
+        name="descricao"
+        [(ngModel)]="filtro.descricao"
+      />
+    </div>
+
+    <div class="p-col-12 p-md-3 p-fluid">
+      <label> Nome </label>
+      <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome" />
+    </div>
+    <div class="p-col-6 p-md-3 p-fluid">
+      <label>Valor</label>
+      <input pInputText type="number" name="valor" />
+    </div>
+
+    <div class="p-col-12 p-md-3 p-fluid">
+      <label style="display: block">Data Inicio</label>
+      <p-calendar
+        dateFormat="dd/mm/yy"
+        name="dtCadastroInicio"
+        [(ngModel)]="filtro.dtCadastroInicio"
+      ></p-calendar>
+    </div>
+    <div class="p-col-12 p-md-3 p-fluid">
+      <label>Data Fim</label>
+      <p-calendar
+        dateFormat="dd/mm/yy"
+        name="dtCadastroFim"
+        [(ngModel)]="filtro.dtCadastroFim"
+      ></p-calendar>
+    </div>
+
+    <div class="p-col-12 p-md-6 p-fluid">
+      <label>Categoria</label>
+      <p-dropdown
+        name="categoria"
+        [options]="categorias"
+        placeholder="Selecione"
+        [(ngModel)]="filtro.categoriaProdutoId"
+      ></p-dropdown>
+    </div>
+    <div class="p-col-12">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </div>
+</form>

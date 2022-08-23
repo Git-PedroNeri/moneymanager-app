@@ -95,11 +95,6 @@ export class ProdutoCadastroComponent implements OnInit {
     this.produtoService
       .busrcarPorId(id)
       .then((produto) => {
-        console.log(produto.categoriaProduto);
-        console.log(this.produtoForm.value);
-        console.log(this.categoriaProdutoSelectItem);
-        console.log(this.countriesSelectItem);
-
         this.produtoForm.patchValue(produto);
       })
       .catch((erro) => this.errorHandler.handle(erro));

@@ -1,3 +1,4 @@
+import { ProdutosTableComponent } from "./../produtos-table/produtos-table.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -21,10 +22,16 @@ import { TooltipModule } from "primeng/tooltip";
 import { ProdutosPesquisaComponent } from "../produtos-pesquisa/produtos-pesquisa.component";
 import { ProdutoCadastroComponent } from "./../produto-cadastro/produto-cadastro.component";
 import { ProdutosRoutingModule } from "./produtos-routing.module";
+import { ProdutosSearchFilterComponent } from "../produtos-search-filter/produtos-search-filter.component";
 
 @NgModule({
   exports: [ProdutosPesquisaComponent],
-  declarations: [ProdutoCadastroComponent, ProdutosPesquisaComponent],
+  declarations: [
+    ProdutoCadastroComponent,
+    ProdutosPesquisaComponent,
+    ProdutosTableComponent,
+    ProdutosSearchFilterComponent,
+  ],
   imports: [
     MultiSelectModule,
     CommonModule,

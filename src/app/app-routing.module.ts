@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: "admin/novo", component: AdminComponent },
   { path: "admin/:token", component: ContabilidadeComponent },
 
-
   {
     path: "lancamentos",
     loadChildren: () =>
@@ -45,6 +44,11 @@ const routes: Routes = [
       import("app/relatorios/relatorios.module").then(
         (m) => m.RelatoriosModule
       ),
+  },
+  {
+    path: "usuarios",
+    loadChildren: () =>
+      import("app/usuarios/usuarios.module").then((m) => m.UsuariosModule),
   },
 
   { path: "", redirectTo: "dashboard", pathMatch: "full" },

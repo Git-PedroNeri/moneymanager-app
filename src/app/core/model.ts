@@ -61,6 +61,7 @@ export class Lancamento {
   categoria = new Categoria();
   anexo: string;
   urlAnexo: string;
+  usuario: string;
 }
 
 export class Product {

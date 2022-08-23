@@ -1,27 +1,24 @@
-import {
-  Injectable,
-  Injector,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
-  ConfirmationService,
-  LazyLoadEvent,
   MessageService,
   SortEvent,
+  LazyLoadEvent,
+  ConfirmationService,
 } from "primeng/api";
 import { Table } from "primeng/table";
 import { take } from "rxjs/operators";
 
+import { environment } from "environments/environment";
 import { BaseResourceModel } from "./base-resource.model";
 import { BaseResourceService } from "./base-resource.service";
+import { FiltroParams } from "../filtroParams";
+import { Sort } from "../sort";
 import { BaseFiltroModel } from "./base-filtro.model";
 import { StoreFilterService } from "../storeFilterService";
-import { Sort } from "../sort";
-import { environment } from "environments/environment";
-import { FiltroParams } from "../filtroParams";
-@Injectable()
+@Component({
+  template: "",
+})
 export abstract class BaseResourceListV2Component<
   T extends BaseResourceModel,
   F extends BaseFiltroModel
@@ -94,7 +91,9 @@ export abstract class BaseResourceListV2Component<
   }
 
   public pesquisa(event?: LazyLoadEvent) {
-    this.table.first = 0;
+    if (this.table) {
+      this.table.first = 0;
+    }
     this.onLoadList();
     this.paginaAtual = 0;
     this.isButtonPesquisa = true;

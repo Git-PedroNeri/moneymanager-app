@@ -1,0 +1,178 @@
+<div class="container">
+  <div>
+    <form novalidate autocomplete="off">
+      <p-fieldset id="panelCadastro" legend="Pesquisa Usuários">
+        <div class="p-col-12 p-fluid">
+          <label class="label-filled" style="margin-top: 5px"
+            >Login de rede:</label
+          >
+          <input
+            type="text"
+            pInputText
+            name="usuarioRede"
+            #usuarioRede="ngModel"
+            [(ngModel)]="filtro.email"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="p-col-12 p-fluid">
+          <label class="label-filled" style="margin-top: 5px">Nome:</label>
+          <input
+            type="text"
+            pInputText
+            id="nome"
+            name="nome"
+            autocomplete="off"
+            #nome="ngModel"
+            [(ngModel)]="filtro.nome"
+            maxlength="100"
+          />
+        </div>
+        <div class="p-col-12 p-fluid">
+          <label class="label-filled" style="margin-top: 5px">Ativo?</label>
+          <p-radioButton
+            [(ngModel)]="filtro.situacao"
+            id="sim"
+            title="Sim"
+            name="filtro.ativo"
+            value="SIM"
+            label="Sim"
+          ></p-radioButton
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+          <p-radioButton
+            [(ngModel)]="filtro.situacao"
+            id="nao"
+            title="Não"
+            name="filtro.ativo"
+            value="NAO"
+            label="Não"
+          ></p-radioButton>
+        </div>
+
+        <div style="text-align: right">
+          <p-button
+            id="pesquisar"
+            name="pesquisar"
+            title="Pesquisar"
+            label="Pesquisar"
+            (onClick)="pesquisa()"
+            icon="ui-icon-search"
+          ></p-button
+          >&nbsp;
+          <p-button
+            id="limpar"
+            name="limpar"
+            title="Limpar"
+            label="Limpar"
+            (onClick)="cleanForm()"
+            styleClass="ui-button-secondary"
+          ></p-button>
+        </div>
+      </p-fieldset>
+    </form>
+  </div>
+  <div class="ui-g-12 ui-lg-12">
+    <div class="ui-g-2 ui-md-2 alinhar-direita">
+      <a
+        pButton
+        id="incluir"
+        name="incluir"
+        title="Incluir"
+        label="Incluir"
+        (click)="incluir()"
+        icon="ui-icon-add"
+      ></a>
+    </div>
+  </div>
+  <p-table
+    [value]="resources"
+    selectionMode="single"
+    [rows]="ITENS_POR_PAGINA"
+    [paginator]="true"
+    [pageLinks]="3"
+    [responsive]="true"
+    [autoLayout]="true"
+    [lazy]="true"
+    [totalRecords]="totalRegistro"
+    (onSort)="onSortList($event)"
+    [reorderableColumns]="true"
+    (onPage)="changePage($event)"
+    [alwaysShowPaginator]="totalRegistro > 0"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Nome</th>
+        <th>Login</th>
+        <th style="width: 150px">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario>
+      <tr>
+        <td>
+          {{ usuario.nome }}
+        </td>
+        <td>
+          {{ usuario.email }}
+        </td>
+        <td>
+          <span>
+            <a
+              pButton
+              title="Editar registro"
+              id="editar"
+              name="editar"
+              (click)="editar(usuario.id)"
+              icon="ui-icon-edit"
+              class="margem-left ui-button-success"
+              style="margin-right: 3px"
+            ></a>
+          </span>
+          <span>
+            <a
+              pButton
+              id="inativar"
+              name="inativar"
+              title="Inativar"
+              (click)="callDialogInativar(textoInativar, usuario)"
+              icon="ui-icon-lock"
+              class="margem-left ui-button-danger"
+              style="margin-right: 3px"
+              *ngIf="usuario.situacao === ST_ATIVO"
+            ></a>
+
+            <a
+              pButton
+              id="ativar"
+              name="ativar"
+              title="Ativar"
+              (click)="callDialogAtivar(textoAtivar, usuario)"
+              icon="ui-icon-lock-open"
+              class="margem-left orange-btn"
+              style="margin-right: 3px"
+              *ngIf="usuario.situacao !== ST_ATIVO"
+            ></a>
+          </span>
+          <span>
+            <a
+              pButton
+              style="margin-right: 3px"
+              (click)="
+                callDialogDelete(
+                  'Deseja realmente excluir este registro?',
+                  usuario
+                )
+              "
+              icon="ui-icon-delete-forever"
+              class="margem-left ui-button-danger"
+              title="Excluir"
+            ></a>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Total de registros: {{ totalRegistro }}
+    </ng-template>
+  </p-table>
+</div>

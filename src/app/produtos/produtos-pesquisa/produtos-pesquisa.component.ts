@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Injector, OnInit, ViewChild } from "@angular/core";
+import { Component, Injector, Input, OnInit, ViewChild } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ErrorHandlerService } from "app/core/error-handler.service";
 import { AuthService } from "app/seguranca/auth.service";
@@ -13,6 +13,7 @@ import {
 } from "primeng/api";
 import { Table } from "primeng/table";
 import { FiltroProdutoDTO } from "../model/filter/filtroProdutoDTO";
+import { Product } from "../model/product";
 import { ProdutoService } from "../services/produto.service";
 
 class City {
@@ -37,6 +38,17 @@ export class ProdutosPesquisaComponent implements OnInit {
   cities: City[];
 
   selectedCities: City[];
+
+  value: number;
+
+  siglaMoeda: string = "BRL";
+
+  product: Product;
+
+  // products:Array<Product>
+  products: Product[];
+
+  count: number = 0;
 
   categoriProdutoSelectItem: SelectItem[] = [];
   totalRegistros = 0;
@@ -68,14 +80,18 @@ export class ProdutosPesquisaComponent implements OnInit {
       { name: "Istanbul", code: "IST" },
       { name: "Paris", code: "PRS" },
     ];
-  }
 
-  public cleanForm() {
-    this.filtro = new FiltroProdutoDTO();
-  }
+    this.product = new Product(
+      "NICEHAT",
+      "A Nice Black Hat",
+      "/assets/images/products/black-hat.jpg",
+      ["Men", "Accessories", "Hats"],
+      29.99
+    );
 
-  ngOnInit(): void {
-    this.title.setTitle("Pesquisa de Produto");
+    this.products = [];
+
+    this.generateProducts();
   }
 
   pesquisar(pagina = 0) {
@@ -88,34 +104,42 @@ export class ProdutosPesquisaComponent implements OnInit {
       })
       .catch((erro) => this.errorHandler.handle(erro));
   }
-  aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
+
+  generateProducts() {
+    this.products = [
+      new Product(
+        "MYSHOES",
+        "Black Running Shoes",
+        "/assets/images/products/black-shoes.jpg",
+        ["Men", "Shoes", "Running Shoes"],
+        109.99
+      ),
+      new Product(
+        "NEATOJACKET",
+        "Blue Jacket",
+        "/assets/images/products/blue-jacket.jpg",
+        ["Women", "Apparel", "Jackets & Vests"],
+        238.99
+      ),
+      new Product(
+        "NICEHAT",
+        "A Nice Black Hat",
+        "/assets/images/products/black-hat.jpg",
+        ["Men", "Accessories", "Hats"],
+        29.99
+      ),
+    ];
   }
 
-  confirmarExclusao(produto: any) {
-    this.confirmation.confirm({
-      message: "Tem certeza que deseja excluir?",
-      accept: () => {
-        this.excluir(produto);
-      },
-    });
+  public cleanForm() {
+    this.filtro = new FiltroProdutoDTO();
   }
-  excluir(produto: any) {
-    this.produtoService
-      .remover(produto.id)
-      .then(() => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.reset();
-        }
 
-        this.messageService.add({
-          severity: "success",
-          detail: "Produto excluído com sucesso!",
-        });
-      })
-      .catch((erro) => this.errorHandler.handle(erro));
+  ngOnInit(): void {
+    this.title.setTitle("Pesquisa de Produto");
+  }
+
+  cidadeAdicionada(cidade: City) {
+    this.cities.push(cidade);
   }
 }

@@ -21,6 +21,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { NaoAutorizadoComponent } from "./nao-autorizado.component";
 import { PaginaNaoEncontradaComponent } from "./pagina-nao-encontrada.component";
 import { BlockUIModule } from "ng-block-ui";
+import { BaseComponent } from "./base/base.component";
 
 registerLocaleData(localePt);
 
@@ -38,6 +39,7 @@ registerLocaleData(localePt);
     NavbarComponent,
     PaginaNaoEncontradaComponent,
     NaoAutorizadoComponent,
+    BaseComponent,
   ],
   exports: [NavbarComponent, ToastModule, ConfirmDialogModule],
   providers: [
