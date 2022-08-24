@@ -57,7 +57,6 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   }
 
   create(resource: T): Observable<T> {
-    debugger
     return this.http
       .post(`${environment.apiUrl}/${this.apiPath}`, resource)
       .pipe(catchError(this.handleError));

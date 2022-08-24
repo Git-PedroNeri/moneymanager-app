@@ -14,6 +14,7 @@ import { TableModule } from "primeng/table";
 import { UsuarioService } from "./usuario.service";
 import { UsuarioFormComponent } from "./usuario-form/usuario-form.component";
 import { PickListModule } from "primeng/picklist";
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [UsuarioSearchComponent, UsuarioFormComponent],
@@ -29,6 +30,7 @@ import { PickListModule } from "primeng/picklist";
     InputTextModule,
     TableModule,
     PickListModule,
+    SharedModule
   ],
   providers: [UsuarioService],
 })

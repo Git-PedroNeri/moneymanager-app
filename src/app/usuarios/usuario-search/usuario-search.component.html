@@ -123,34 +123,9 @@
               id="editar"
               name="editar"
               (click)="editar(usuario.id)"
-              icon="ui-icon-edit"
+              icon="pi pi-pencil"
               class="margem-left ui-button-success"
               style="margin-right: 3px"
-            ></a>
-          </span>
-          <span>
-            <a
-              pButton
-              id="inativar"
-              name="inativar"
-              title="Inativar"
-              (click)="callDialogInativar(textoInativar, usuario)"
-              icon="ui-icon-lock"
-              class="margem-left ui-button-danger"
-              style="margin-right: 3px"
-              *ngIf="usuario.situacao === ST_ATIVO"
-            ></a>
-
-            <a
-              pButton
-              id="ativar"
-              name="ativar"
-              title="Ativar"
-              (click)="callDialogAtivar(textoAtivar, usuario)"
-              icon="ui-icon-lock-open"
-              class="margem-left orange-btn"
-              style="margin-right: 3px"
-              *ngIf="usuario.situacao !== ST_ATIVO"
             ></a>
           </span>
           <span>
@@ -163,7 +138,7 @@
                   usuario
                 )
               "
-              icon="ui-icon-delete-forever"
+              icon="pi pi-times"
               class="margem-left ui-button-danger"
               title="Excluir"
             ></a>
