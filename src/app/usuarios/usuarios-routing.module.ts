@@ -42,6 +42,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ["ROLE_CADASTRAR_USUARIO"] },
   },
+  {
+    path: ":id/editar",
+    component: UsuarioFormComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ["ROLE_CADASTRAR_USUARIO"] },
+  },
 ];
 
 @NgModule({
