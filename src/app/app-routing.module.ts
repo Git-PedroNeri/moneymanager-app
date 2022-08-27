@@ -27,6 +27,13 @@ const routes: Routes = [
       import("app/pessoas/pessoas.module").then((m) => m.PessoasModule),
   },
   {
+    path: "transferencias",
+    loadChildren: () =>
+      import("app/transferencia/transferencia.module").then(
+        (m) => m.TransferenciaModule
+      ),
+  },
+  {
     path: "produtos",
     loadChildren: () =>
       import("app/produtos/produtos/produtos.module").then(

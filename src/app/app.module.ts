@@ -1,8 +1,10 @@
-import { NgModule } from "@angular/core";
+import localePt from "@angular/common/locales/pt";
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TableModule } from "primeng/table";
 
+import { registerLocaleData } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { AccordionModule } from "@syncfusion/ej2-angular-navigations";
 import { BlockUIModule } from "ng-block-ui";
@@ -16,6 +18,8 @@ import { CardComponent } from "./card/card.component";
 import { CoreModule } from "./core/core.module";
 import { ProdutosModule } from "./produtos/produtos/produtos.module";
 import { SegurancaModule } from "./seguranca/seguranca.module";
+
+registerLocaleData(localePt, "pt");
 
 @NgModule({
   declarations: [AppComponent, CardComponent],
@@ -38,7 +42,13 @@ import { SegurancaModule } from "./seguranca/seguranca.module";
     FormsModule,
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: "pt" },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: "BRL",
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

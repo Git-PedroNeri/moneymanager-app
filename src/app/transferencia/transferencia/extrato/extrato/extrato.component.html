@@ -1,0 +1,35 @@
+<form
+  #transferenciaForm="ngForm"
+  class="formulario"
+  (ngSubmit)="transferir(transferenciaForm)"
+>
+  <h2 class="formulario__titulo">Nova Transferência</h2>
+  <div class="form-field">
+    <label for="valor">Valor</label>
+    <span class="md-inputfield">
+      <input
+        pInputText
+        id="valor"
+        type="number"
+        [(ngModel)]="valor"
+        name="valor"
+      />
+    </span>
+  </div>
+  <div class="form-field">
+    <label for="destino">Destino</label>
+    <span class="md-inputfield">
+      <input
+        pInputText
+        id="destino"
+        type="text"
+        [(ngModel)]="destino"
+        name="destino"
+      />
+    </span>
+  </div>
+
+  <div>
+    <button styleClass="ui-button-secondary" type="submit">Transferir</button>
+  </div>
+</form>

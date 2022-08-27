@@ -1,0 +1,8 @@
+<div class="container" style="padding-top: 20px">
+  <app-extrato (aoTransferir)="transferencia($event)"></app-extrato>
+</div>
+<div class="container" style="padding-top: 20px">
+  <app-historico-transacoes
+    [transferencias]="transferencias"
+  ></app-historico-transacoes>
+</div>

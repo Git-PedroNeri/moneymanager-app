@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>Data</th>
+    <th>Valor</th>
+    <th>Destino</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of transferencias">
+      <td>{{ t?.data | date: "short" }}</td>
+      <td>{{ t?.valor | currency: "USD" }}</td>
+      <td>{{ t?.destino }}</td>
+    </tr>
+  </tbody>
+</table>
