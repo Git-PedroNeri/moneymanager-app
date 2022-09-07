@@ -1,5 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { Transferencia } from "app/transferencia/models/transferencia.model";
+import { TransferenciaService } from "app/transferencia/transferencia.service";
+import { minusculoValidator } from "./extrato.validator";
+import { nomeEmailIguaisValidator } from './nome-email-iguais.validator';
 
 @Component({
   selector: "app-extrato",
@@ -13,13 +22,32 @@ export class ExtratoComponent implements OnInit {
   destino: number;
 
   transferencias: any[];
+  form_dados_pessoais: FormGroup;
 
-  constructor() {}
+  constructor(
+    transferenciaService: TransferenciaService,
+    private formBuider: FormBuilder
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form_dados_pessoais = this.formBuider.group({
+      nomeOrigem: ["", [Validators.required, minusculoValidator]],
+      email: [
+        "",
+        [Validators.required, Validators.minLength(3), Validators.email],
+      ],
+    },{
+      validators:[nomeEmailIguaisValidator]
+    });
+  }
 
   transferir(transferenciaForm: FormControl) {
     console.log("Realizando Transferência");
+    const trans = this.form_dados_pessoais.getRawValue() as Transferencia;
+    this.form_dados_pessoais.valueChanges.subscribe((e) => {
+      console.log(e);
+    });
+    console.log(trans);
     this.aoTransferir.emit(transferenciaForm);
   }
 }

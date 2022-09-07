@@ -9,16 +9,21 @@ import { TransferenciaService } from "../transferencia.service";
 })
 export class TransferenciaComponent implements OnInit {
   transferencias: Transferencia[] = [];
+
   constructor(private transferenciaService: TransferenciaService) {}
 
   ngOnInit(): void {
-    this.transferenciaService.buscarTransfrencias().subscribe((t) => {
-      this.transferencias = t;
-    });
+    this.transferenciaService.buscarTransfrencias().subscribe(
+      (t) => {
+        this.transferencias = t;
+      },
+      (error) => console.log("Deu meme", error)
+    );
   }
 
   transferencia($event) {
-    const transferencia = { ...$event, data: new Date() };
+    let transferencia: Transferencia = { ...$event, data: new Date() };
     this.transferencias.push(transferencia);
+    this.transferenciaService.inserirTransfrencia(transferencia);
   }
 }

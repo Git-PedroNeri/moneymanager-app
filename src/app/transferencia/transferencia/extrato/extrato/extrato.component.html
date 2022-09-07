@@ -30,6 +30,57 @@
   </div>
 
   <div>
-    <button styleClass="ui-button-secondary" type="submit">Transferir</button>
+    <button
+      *ngIf="form_dados_pessoais.valid"
+      styleClass="ui-button-secondary"
+      type="submit"
+    >
+      Transferir
+    </button>
   </div>
+</form>
+<form [formGroup]="form_dados_pessoais">
+  <h2>Formulário Reativo</h2>
+  <div class="form-field">
+    <label for="valor">Nome</label>
+    <span class="md-inputfield">
+      <input
+        pInputText
+        id="nome"
+        type="text"
+        formControlName="nomeOrigem"
+        name="nome"
+      />
+    </span>
+    <span *ngIf="form_dados_pessoais.get('nomeOrigem')?.errors?.minusculo"
+      >Deve conteer apenas minusculos</span
+    >
+  </div>
+  <div class="form-field">
+    <label for="valor">Email</label>
+    <span class="md-inputfield">
+      <input
+        pInputText
+        id="email"
+        type="text"
+        formControlName="email"
+        name="email"
+      />
+    </span>
+  </div>
+  <span
+    *ngIf="
+      form_dados_pessoais.get('email')?.errors?.required &&
+      form_dados_pessoais.get('email')?.touched
+    "
+    >Não pode ser vazio</span
+  >
+  <span
+    *ngIf="
+      form_dados_pessoais.get('email')?.errors?.email &&
+      form_dados_pessoais.get('email')?.touched
+    "
+    >Deve ser um email</span
+  >
+  <span *ngIf="form_dados_pessoais?.errors?.nomeIgualEmail"></span>
 </form>
