@@ -7,8 +7,9 @@ import {
 } from "@angular/forms";
 import { Transferencia } from "app/transferencia/models/transferencia.model";
 import { TransferenciaService } from "app/transferencia/transferencia.service";
+import { map, tap } from "rxjs/operators";
 import { minusculoValidator } from "./extrato.validator";
-import { nomeEmailIguaisValidator } from './nome-email-iguais.validator';
+import { nomeEmailIguaisValidator } from "./nome-email-iguais.validator";
 
 @Component({
   selector: "app-extrato",
@@ -27,18 +28,25 @@ export class ExtratoComponent implements OnInit {
   constructor(
     transferenciaService: TransferenciaService,
     private formBuider: FormBuilder
-  ) {}
+  ) {
+    this.form_dados_pessoais = this.formBuider.group(
+      {
+        nomeOrigem: ["", [Validators.required, minusculoValidator]],
+        email: [
+          "",
+          [Validators.required, Validators.minLength(3), Validators.email],
+        ],
+      },
+      {
+        validators: [nomeEmailIguaisValidator],
+      }
+    );
+  }
 
   ngOnInit(): void {
-    this.form_dados_pessoais = this.formBuider.group({
-      nomeOrigem: ["", [Validators.required, minusculoValidator]],
-      email: [
-        "",
-        [Validators.required, Validators.minLength(3), Validators.email],
-      ],
-    },{
-      validators:[nomeEmailIguaisValidator]
-    });
+    this.form_dados_pessoais.valueChanges
+      .pipe(tap((e) => console.log(e)))
+      .subscribe((a) => console.log(a));
   }
 
   transferir(transferenciaForm: FormControl) {
